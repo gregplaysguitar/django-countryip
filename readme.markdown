@@ -1,3 +1,12 @@
+Thanks to smileychris for the original version of this software - see 
+
+http://code.google.com/p/django-countryip/
+
+
+
+
+
+
 ## Usage
 
 * Put countryip on the pythonpath and add it to your project's installed apps
@@ -8,6 +17,5 @@
 
     from countryip.load import load_data  
     load\_data()
-
 
 

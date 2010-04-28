@@ -5,8 +5,8 @@
 * Copy GeoIPCountryWhois.csv into the countryip/load directory
 * From your project's python prompt, type
 
-    from countryip.load import load_data
-    load\_data()
+      from countryip.load import load_data
+      load\_data()
 
 
 

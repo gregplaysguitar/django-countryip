@@ -14,7 +14,7 @@ EXTRA_ROWS = (
     ('127.0.0.0', '127.255.255.255', '2130706432', '2147483647', 'X2', 'Local Computer'),
 )
 
-def load_data(filename=None):
+def load_data(filename=None, verbose=False):
     countries = {}
     print 'Opening csv file...'
     filename = filename or FILENAME
@@ -32,7 +32,11 @@ def load_data(filename=None):
         except ValueError:
             continue
         if country not in countries:
+            if verbose:
+                print "Creating country:", country, name
             countries[country] = Country.objects.create(code=country, name=name)
+        if verbose:
+            print "Creating iprange:", begin_num, end_num, countries[country]
         IPRange.objects.create(start=begin_num, end=end_num,
                                country=countries[country])
     print 'Done'

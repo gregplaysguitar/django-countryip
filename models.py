@@ -37,8 +37,8 @@ class IPRange(models.Model):
     country = models.ForeignKey(Country, db_column='cc')
     # Note: start and end columns need to be changed to LONG in the database
     # after a syncdb
-    start = models.IntegerField(primary_key=True)
-    end = models.IntegerField()
+    start = models.BigIntegerField(primary_key=True)
+    end = models.BigIntegerField()
 
     def get_start_ip(self):
         return long_to_ip(self.start)

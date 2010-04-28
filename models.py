@@ -3,6 +3,14 @@
 from django.db import models
 from managers import CountryManager
 from helpers import long_to_ip
+from django.db.models.fields import BigIntegerField
+
+
+class ActualBigIntegerField(BigIntegerField):
+    def db_type(self):
+        return 'bigint'
+
+
 
 
 class Country(models.Model):
@@ -37,8 +45,8 @@ class IPRange(models.Model):
     country = models.ForeignKey(Country, db_column='cc')
     # Note: start and end columns need to be changed to LONG in the database
     # after a syncdb
-    start = models.BigIntegerField(primary_key=True)
-    end = models.BigIntegerField()
+    start = ActualBigIntegerField(primary_key=True)
+    end = ActualBigIntegerField()
 
     def get_start_ip(self):
         return long_to_ip(self.start)

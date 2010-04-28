@@ -6,7 +6,7 @@
 * From your project's python prompt, type
 
 
-    from countryip.load import load_data
+    from countryip.load import load_data  
     load\_data()
 
 

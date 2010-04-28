@@ -1,0 +1,4 @@
+*.pyc
+
+load/GeoIPCountryWhois.csv
+

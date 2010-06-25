@@ -15,7 +15,13 @@ http://code.google.com/p/django-countryip/
 * From your project's python prompt, type
 
 
+
     from countryip.load import load_data  
     load\_data()
+
+
+
+* In a view, use `Country.objects.for_ip(request.META['REMOTE_ADDR'])` to get country code
+* In a template, use `{% load countryip_tags %}` and `{% get_country as country_code %}`
 
 

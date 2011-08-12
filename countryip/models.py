@@ -7,7 +7,7 @@ from django.db.models.fields import BigIntegerField
 
 
 class ActualBigIntegerField(BigIntegerField):
-    def db_type(self):
+    def db_type(self, connection=None):
         return 'bigint'
 
 

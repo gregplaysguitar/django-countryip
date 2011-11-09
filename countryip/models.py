@@ -15,11 +15,10 @@ class ActualBigIntegerField(BigIntegerField):
 
 class Country(models.Model):
     class Meta:
-        db_table = 'cc'
         ordering = ['name']
 
-    code = models.CharField(max_length=2, primary_key=True, db_column='cc')
-    name = models.CharField(max_length=50, db_column='cn')
+    code = models.CharField(max_length=2, primary_key=True)
+    name = models.CharField(max_length=50)
 
     allobjects = models.Manager()
     # `objects` only returns real countries
@@ -39,10 +38,7 @@ class Country(models.Model):
 
 
 class IPRange(models.Model):
-    class Meta:
-        db_table = 'ip'
-
-    country = models.ForeignKey(Country, db_column='cc')
+    country = models.ForeignKey(Country)
     # Note: start and end columns need to be changed to LONG in the database
     # after a syncdb
     start = ActualBigIntegerField(primary_key=True)

@@ -3,8 +3,6 @@ from itertools import chain
 from os.path import dirname, join
 from countryip.models import Country, IPRange
 
-FILENAME = join(dirname(__file__), 'GeoIPCountryWhois.csv')
-
 EXTRA_ROWS = (
     # Private network ranges
     ('10.0.0.0', '10.255.255.255', '167772160', '184549375', 'X1', 'Private Network'),
@@ -14,10 +12,9 @@ EXTRA_ROWS = (
     ('127.0.0.0', '127.255.255.255', '2130706432', '2147483647', 'X2', 'Local Computer'),
 )
 
-def load_data(filename=None, verbose=False):
+def load_data(filename, verbose=False):
     countries = {}
     print 'Opening csv file...'
-    filename = filename or FILENAME
     reader = csv.reader(open(filename, "rb"))
     # Delete any existing data
     if Country.allobjects.count() or IPRange.objects.count():

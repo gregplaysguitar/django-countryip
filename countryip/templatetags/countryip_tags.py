@@ -17,17 +17,20 @@ def easy_tag(func):
 
 
 class GetCountryNode(template.Node):
-    def __init__(self, varname):
+    def __init__(self, varname, for_ip):
         self.varname = varname
+        self.for_ip = for_ip
         
     def render(self, context):
-        c = Country.objects.for_ip(context['request'].META['REMOTE_ADDR'])
+        if self.for_ip:
+            for_ip = template.Variable(self.for_ip).resolve(context)
+        else:
+            for_ip = context['request'].META['REMOTE_ADDR']
+        c = Country.objects.for_ip(for_ip)
         context[self.varname] = c
         return ''
 
 @register.tag
 @easy_tag
-def get_country(_tag, _as, varname):
-    return GetCountryNode(varname)
-
-
+def get_country(_tag, _as, varname, for_ip=None):
+    return GetCountryNode(varname, for_ip)

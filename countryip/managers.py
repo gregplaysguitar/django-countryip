@@ -14,14 +14,14 @@ class CountryManager(models.Manager):
                 return
             raise TypeError, 'Invalid IP'
         try:
-            return self.get_query_set(only_countries=False)\
+            return self.get_queryset(only_countries=False)\
                        .get(iprange__start__lte=ip, iprange__end__gte=ip)
         except ObjectDoesNotExist:
             if not catch_errors:
                 raise
 
-    def get_query_set(self, only_countries=True):
-        qs = super(CountryManager, self).get_query_set()
+    def get_queryset(self, only_countries=True):
+        qs = super(CountryManager, self).get_queryset()
         if only_countries:
             qs = qs.exclude(code='A1').exclude(code='A2')\
                    .exclude(code='X1').exclude(code='X2')
